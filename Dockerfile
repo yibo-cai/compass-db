@@ -1,6 +1,6 @@
 FROM ubuntu:trusty
 
-EXPOSE 3306/tcp
+EXPOSE 3306
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server && \
