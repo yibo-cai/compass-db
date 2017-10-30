@@ -25,7 +25,7 @@ create_users_and_dbs() {
 }
 
 listen_on_all_interfaces() {
-    cat > /etc/mysql/conf.d/mysql-listen.cnf <<EOF
+    cat >> /etc/mysql/conf.d/mysql-listen-compass.cnf <<EOF
 [mysqld]
 bind-address=0.0.0.0
 [mysqld_safe]
@@ -35,7 +35,9 @@ EOF
 
 
 if [[ -z ${1} ]]; then
-    create_users_and_dbs
-    listen_on_all_interfaces
+    if [ ! -f /etc/mysql/conf.d/mysql-listen-compass.cnf ]; then
+        create_users_and_dbs
+        listen_on_all_interfaces
+    fi
     /usr/bin/mysqld_safe
 fi
